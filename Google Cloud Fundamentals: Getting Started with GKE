@@ -1,0 +1,26 @@
+Google Cloud Fundamentals: Getting Started with GKE
+***************************************************
+Task 3: Start a Kubernetes Engine cluster
+***************************************************-
+1.Export current zone into Environment Variable
+  export MY_ZONE=us-central1-a
+2. Start a Kubernetes cluster managed by Kubernetes Engine.Name the cluster webfrontend and configure it to run 2 nodes
+  gcloud container clusters create webfrontend --zone $MY_ZONE --num-nodes 2
+3. Check the Kubernetes Version
+  kubectl version
+4. List the compute nodes created in that particular zone
+   gcloud compute instances list --filter="us-central1-a"
+5.Launch a Nginx container 
+   kubectl create deploy nginx --image=nginx:1.17.10
+6. View the pod running the Nginx Container
+   kubectl get pods
+7. Expose the Nginx container to the internet
+   kubectl expose deployment nginx --port 80 --type LoadBalancer
+8. View the new service
+   kubectl get services
+9. Scale up the pods running your service
+   kubectl scale deployment nginx --replicas 3
+10. Confirm the replication at step 9 worked
+    kubectl get pods
+11. Confirm the external IP of the pods after replication has not changed.
+    kubectl get services
