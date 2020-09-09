@@ -1,0 +1,36 @@
+Google Cloud Fundamentals:Getting Started with Compute Engine
+*************************************************************
+Task 1: Creating two Virtual Machines
+*************************************************************
+  1. List regions in the project
+     gcloud compute zones list | grep
+  2. List zones in GCP region us-central1
+     gcloud compute zones list | grep us-central1
+  3. Select a zone in from the list returned
+     gcloud config set compute/zone us-central1-b
+  4. Create first VM instance in the selected zone
+     gcloud compute instances create "first_vm" \
+	--machine-type "n1-standard-1" \
+	--image-project "debian-cloud" \
+	--image "debian-9-stretch-v20190213" \
+	--subnet "default"
+  5. Create second VM instance in the selected zone
+     gcloud compute instances create "second_vm" \
+	--machine-type "n1-standard-1" \
+	--image-project "debian-cloud" \
+	--image "debian-9-stretch-v20190213" \
+	--subnet "default"
+ 6.  ping second_vm from first_vm
+ 7.  CTRL+C to terminate the ping 
+ 8.  ssh into first_vm
+ 9.  Install Nginx into first_vm
+     sudo apt-get install nginx-light -y 
+ 10. Edit homepage to add custom image 
+     sudo nano /var/www/html/index.nginx-debian.html
+ 11.Confirm that the custom image has been installed into first_vm
+    curl http://localhost/
+ 12.To confirm access of the webserver by second_vm from the first_vm
+   from second_vm SSH
+    curl http://first_vm/
+	
+	
